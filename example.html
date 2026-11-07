@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOM Style Practice</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      display: grid;
+      place-items: center;
+      background: #f2f5f9;
+      color: #243447;
+      font-family: system-ui, sans-serif;
+    }
+
+    .card {
+      width: min(100%, 360px);
+      padding: 28px;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      background-color: #ffffff;
+      color: #243447;
+      box-shadow: 0 10px 24px rgb(36 52 71 / 10%);
+      transition: background-color 200ms ease, border-color 200ms ease;
+    }
+
+    .card h1 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      line-height: 1.5;
+    }
+
+    button {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 8px;
+      background: #1769aa;
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #70b7f5;
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="card" id="profile-card">
+      <h1 id="profile-name">Meet Amina</h1>
+      <p id="profile-description">Amina is learning how JavaScript can update a web page.</p>
+      <button id="style-button" type="button">Try a warm style</button>
+      <p id="status-message" aria-live="polite">The card is using its original style.</p>
+    </article>
+  </main>
+
+  <script>
+    // 1. Find the elements we want JavaScript to work with.
+    const card = document.querySelector("#profile-card");
+    const button = document.querySelector("#style-button");
+    const statusMessage = document.querySelector("#status-message");
+
+    // Remember which style is currently showing.
+    let warmStyleIsOn = false;
+
+    // 2. Listen for a click on the button.
+    button.addEventListener("click", () => {
+      warmStyleIsOn = !warmStyleIsOn;
+
+      if (warmStyleIsOn) {
+        // 3. Change CSS styles through the DOM element's .style property.
+        card.style.backgroundColor = "#fff3e0";
+        card.style.borderColor = "#e99a3c";
+        card.style.color = "#56340c";
+        button.textContent = "Return to the original style";
+        statusMessage.textContent = "The warm style is on.";
+      } else {
+        // An empty value removes the inline style and lets the CSS take over again.
+        card.style.backgroundColor = "";
+        card.style.borderColor = "";
+        card.style.color = "";
+        button.textContent = "Try a warm style";
+        statusMessage.textContent = "The card is using its original style.";
+      }
+    });
+  </script>
+</body>
+</html>
